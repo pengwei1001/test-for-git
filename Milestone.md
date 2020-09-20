@@ -1,1 +1,0 @@
-![Milestone](https://xsgdemo.z7.web.core.windows.net/images/2020Milestone.gif)
