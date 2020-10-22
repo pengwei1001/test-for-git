@@ -3,7 +3,7 @@
 <ol>
 <br>
 <li>概要: 
-<br>當部屬進程有加入新的流程時，需同步更新到有在Job的裡所有的Project，
+<br>當部屬進程有加入新的流程時，需同步更新至有在Job裡的所有Project，
 <br>目前是Cdn及Config的專案有在Job中，所以Cdn與Config的所有專案都要同步更新。
 
 
