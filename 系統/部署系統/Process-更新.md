@@ -26,7 +26,7 @@
 ![image.png](/.attachments/image-7031199f-6422-4077-b92d-5147cfc94e48.png)
 
 <br>
-<Step3> 將這些要更新的流程複製到其他cdn及config的專案中。 
+<Step3> 都確認完之後，就可以將要更新的流程複製到其他cdn及config的專案中囉。 
 
 ![image.png](/.attachments/image-d15d9ddc-a43c-46ab-b146-c2156da55a14.png)
 ![image.png](/.attachments/image-3875223c-2d53-40ff-88dd-22d56ac71c7a.png)
