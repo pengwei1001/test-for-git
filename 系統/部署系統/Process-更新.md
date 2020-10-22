@@ -14,7 +14,7 @@
 <li>詳細步驟 : 
 <br>
 <br>
-<Step1> 先到已有部屬新流程的專案中。
+<Step1> 先到已有部屬新流程的專案中，確認有新增哪些流程。
 
 ![image.png](/.attachments/image-cf34596d-2c4a-4090-8c22-eab4c70f11d9.png)
 -->說明 : 以本次範例的專案太極龍神來說，該專案有新增show-logs與check-success兩項流程，所以要將這兩項流程更新到其他cdn及config的專案中。
