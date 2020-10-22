@@ -6,7 +6,6 @@
 <br>當部屬進程有加入新的流程時，需同步更新至有在Job裡的所有Project，
 <br>目前是Cdn及Config的專案有在Job中，所以Cdn與Config的所有專案都要同步更新。
 
-
 ![image.png](/.attachments/image-7e0175a3-1437-4e8f-840d-5f3e377bdd95.png)
 ![image.png](/.attachments/image-3c659607-b099-43b6-9ddd-d585949893bc.png)
 <br>
@@ -21,9 +20,9 @@
 
 <br>
 
-<Step2> 確認要更新哪些流程後，要把新流程複製到cdn及config的專案中，但在此之前先確認bash，檢查裡面的變數是否寫死，因為這關係到要部屬到哪個專案，如果是寫死的，就要把這個變數改成你要部屬的專案名稱。
+<Step2> 確認要更新哪些流程後，要把新流程複製到cdn及config的專案中，但在此之前先確認bash，檢查變數Job-name是否寫死，因為這關係到要部屬到哪個專案，如果是寫死的，就要把這個變數改成你要部屬的專案名稱。
 
-![image.png](/.attachments/image-7031199f-6422-4077-b92d-5147cfc94e48.png)
+![image.png](/.attachments/image-842dd193-6d77-4d95-951b-2269114f2089.png)
 
 <br>
 <Step3> 都確認完之後，就可以把要更新的流程複製到其他cdn及config的專案中囉。 
