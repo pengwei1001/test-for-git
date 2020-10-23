@@ -43,8 +43,9 @@
 ![image.png](/.attachments/image-93e473cc-e464-454b-93b6-51a62b7f393f.png)
 ![image.png](/.attachments/image-ec9b85bb-7f18-4f3e-a83e-92d5876cad42.png)
 <hr>
-排序完成後按下Done並儲存，確認進程的順序無誤後，部屬的進程更新就順利完成囉!
+排序完成後按下Done並儲存，確認進程的順序無誤後，這樣就更新成功囉。
 
 ![image.png](/.attachments/image-85069614-594a-40a9-8014-5ec9ff88cf43.png)
 
+只不過，現在只更新完一個專案，要記得所有cdn及config的專案都要更新唷!
 #END
