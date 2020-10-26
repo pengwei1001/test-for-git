@@ -26,9 +26,9 @@
 
 [備註] 
 ![image.png](/.attachments/image-6bb6f264-d71d-4e67-a7d4-af1a9cab7f85.png)
-![image.png](/.attachments/image-304f633c-1be6-41ce-a171-725126860c61.png)
+![image.png](/.attachments/image-18fedd5b-6a77-404e-a29b-09d7be8cf271.png)
 <br>
-<Step3> 都確認完之後，就可以把要更新的流程複製到其他cdn及config的專案中囉。 
+<Step3> 都確認完之後，就可以把要更新的流程複製到其他cdn及config的專案中哩。 
 
 ![image.png](/.attachments/image-d15d9ddc-a43c-46ab-b146-c2156da55a14.png)
 ![image.png](/.attachments/image-3875223c-2d53-40ff-88dd-22d56ac71c7a.png)
@@ -45,6 +45,7 @@
 
 ![image.png](/.attachments/image-93e473cc-e464-454b-93b6-51a62b7f393f.png)
 ![image.png](/.attachments/image-ec9b85bb-7f18-4f3e-a83e-92d5876cad42.png)
+![image.png](/.attachments/image-e443d2b5-11a4-44fa-947f-ec64adc66daa.png)
 <hr>
 排序完成後按下Done並儲存，確認進程的順序無誤後，這樣就更新成功囉。
 
