@@ -24,8 +24,9 @@
 
 ![image.png](/.attachments/image-842dd193-6d77-4d95-951b-2269114f2089.png)
 
-[備註]
+[備註] 
 ![image.png](/.attachments/image-6bb6f264-d71d-4e67-a7d4-af1a9cab7f85.png)
+![image.png](/.attachments/image-304f633c-1be6-41ce-a171-725126860c61.png)
 <br>
 <Step3> 都確認完之後，就可以把要更新的流程複製到其他cdn及config的專案中囉。 
 
