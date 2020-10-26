@@ -45,7 +45,7 @@
 
 ![image.png](/.attachments/image-93e473cc-e464-454b-93b6-51a62b7f393f.png)
 ![image.png](/.attachments/image-ec9b85bb-7f18-4f3e-a83e-92d5876cad42.png)
-![image.png](/.attachments/image-e443d2b5-11a4-44fa-947f-ec64adc66daa.png)
+![image.png](/.attachments/image-6d97e194-4ec3-42bc-95fa-1ab5377dad88.png)
 <hr>
 排序完成後按下Done並儲存，確認進程的順序無誤後，這樣就更新成功囉。
 
