@@ -20,10 +20,12 @@
 
 <br>
 
-<Step2> 確認要更新哪些流程後，要把新流程複製到cdn及config的專案中，但在此之前先確認bash，檢查變數Job-name內的value是否寫死，因為這關係到要部屬至哪個專案及哪個版本號，如果是寫死的，就要把這個變數改成你要部屬的專案名稱及版本號。
+<Step2> 確認要更新哪些流程後，要把新流程複製到cdn及config的專案中，但在此之前先確認bash，檢查變數Job-name內的value是否寫死，因為這關係到要部屬至哪個專案及哪個版本號，如果是寫死的，就要把這個變數改成你要部屬的專案名稱及版本號。以本範例解說，太極龍神專案名稱為cdn-taichidragon，若圖中專案名稱的值被寫成cdn-taichidragon，這就是被寫死的情形。
 
 ![image.png](/.attachments/image-842dd193-6d77-4d95-951b-2269114f2089.png)
 
+[備註]
+![image.png](/.attachments/image-6bb6f264-d71d-4e67-a7d4-af1a9cab7f85.png)
 <br>
 <Step3> 都確認完之後，就可以把要更新的流程複製到其他cdn及config的專案中囉。 
 
