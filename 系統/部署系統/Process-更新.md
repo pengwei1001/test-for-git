@@ -1,4 +1,4 @@
-#進程更新(process update)<hr>
+#進程的更新(process update)<hr>
 ##進程更新操作說明 
 <ol>
 <br>
