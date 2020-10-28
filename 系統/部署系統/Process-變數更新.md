@@ -18,7 +18,7 @@
 <br>
 點擊某一變數集群內查看內容，圖中紅框處即為變數集群內的變數。
 
-![image.png](/.attachments/image-b363d07b-6e5b-407b-accc-ba8ab4906735.png)
+![image.png](/.attachments/image-6eab03c4-d1a2-4eff-8858-1c4367d58fbb.png)
 
 ----------------------------------------------------------------------------------------------------------------------
 <li> 實例解說與步驟說明
@@ -51,5 +51,7 @@
 ![image.png](/.attachments/image-80459c60-b821-4c1f-bae2-ec950140837e.png)
 ![image.png](/.attachments/image-b6ce41c3-e4f3-458e-b9b1-7c713ea82c20.png)
 <hr>
-以上只是更新好【login】的process變數設定，剩下的四個專案的更新步驟跟上面一樣，把他們都更新完成後，我們就完成變數的更新囉
+以上只是更新好【login】的process變數設定，剩下的四個專案的更新步驟跟上面一樣，把他們都更新完成後，我們就完成變數的更新囉!
+
+#END
 
