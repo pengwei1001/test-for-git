@@ -46,7 +46,7 @@
 ![image.png](/.attachments/image-5a021f3b-a7b0-44b8-8848-b2e527575abc.png)
 
 <br>
-<Step5> 將各個變數新增至Container的環境變數後，要確認這次的變數集群有在專案的變數設定中，如果沒有的話要新增進來，否則剛才設定的變數在這個專案就會找不到。
+<Step5> 將各個變數新增至Container的環境變數後，要確認這次新增的變數集群名字，有在專案的變數設定中，如果沒有的話要加進來，否則剛才設定的變數在這個專案就會找不到。
 
 ![image.png](/.attachments/image-80459c60-b821-4c1f-bae2-ec950140837e.png)
 ![image.png](/.attachments/image-b6ce41c3-e4f3-458e-b9b1-7c713ea82c20.png)
