@@ -1,16 +1,21 @@
-#進程的更新(process update)<hr>
+#進程的更新(Process Update)<hr>
 ##進程更新操作說明 
 <ol>
 <br>
 <li>概要: 
-<br>當部屬進程有加入新的流程時，需同步更新至有在Job裡的所有Project，
-<br>目前是Cdn及Config的專案有在Job中，所以Cdn與Config的所有專案都要同步更新。
+<br>
+有時候某些專案的部屬進程，會有新的流程步驟需要加入，此時須更新job的專案，以下詳細說明 : 
+<ul>
+<li>當部屬進程有加入新的流程時，需同步更新至有在Job裡的所有Project。
+<li>目前是Cdn及Config的專案有在Job中，所以Cdn與Config的所有專案都要同步更新。(請參考下兩圖)
+<li>因此次更新會異動到進程的內容，所以在更新後要通知RD上新的版號。
+</ul>
 
 ![image.png](/.attachments/image-7e0175a3-1437-4e8f-840d-5f3e377bdd95.png)
 ![image.png](/.attachments/image-3c659607-b099-43b6-9ddd-d585949893bc.png)
 <br>
 
-<li>詳細步驟 : 
+<li>實例解說與步驟說明 : 
 <br>
 <br>
 <Step1> 先到已有部屬新流程的專案中，確認有新增哪些流程。
