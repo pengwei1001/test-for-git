@@ -9,9 +9,9 @@
 ![image.png](/.attachments/image-2f7b0c23-bc8e-4982-b200-44f928296dda.png)
 為 Prometheus 的核心主程式，本身也是一個時間序列資料庫，負責整個監控集群的數據拉取、處理、計算和存儲。
 Prometheus Server 裡面包含三個模組如下：
-(1) Retrieval：負責採樣、定時收集及pull數據
-(2) TSDB：儲存時間序列資料於本地磁碟
-(3) HTTP Server：提供 http 服務接口查询，預設 Port 為9090
+(1) Retrieval：負責採樣、定時收集及pull數據。
+(2) TSDB：儲存時間序列資料於本地磁碟。
+(3) HTTP Server：提供 http 服務接口查询，預設 Port 為9090。
 
 
 
@@ -23,14 +23,14 @@ Prometheus Server 裡面包含三個模組如下：
 為 Prometheus 組件，類似代理服務概念，Pushgateway 存在的原因主要是為了解決"不支援或無法用 pull 方式獲取數據的情形"，例如：
 (1) 用於臨時性Job(Short-lived jobs)推送。有些 Job 存在期間較短，有可能 Prometheus 來 Pull 時就消失，因此需透過一個Pushgateway來推送，並讓 Prometheus 去 Pushgateway pull metrics。
 
-(2) 當網路環境不允許 Prometheus Server 和 Exporter 直接進行通訊時(ex：在不同的子網路or防火牆)，就可使用 PushGateway 來進行中轉(可想像成類似轉運站的概念)。
+(2) 當網路環境不允許 Prometheus Server 和 Exporter 直接進行資料數據pull的時候(ex：在不同的子網路or防火牆)，就可使用 PushGateway 來進行中轉(可想像成類似轉運站的概念)。
 
 (3)如果有自己定義 shell 的腳本來監控服務健康狀態，或有監控多項不同的數據，可藉助 PushGateway 把對應數據按照 Prometheus 的格式 push 到 PushGateway。
 
 但是官網建議在上述幾種狀況用 PushGateway 即可，如太常使用的話可能會有影響(須留意)：
-1.如果將多個targets、jobs or instances的數據資料匯入到單一PushGateway做監視，容易使這PushGateway有單一失誤及潛在危險的風險
-2.如果Prometheus pull up 的資訊，up資訊只會針對PushGateway, 不會針對每個匯入資料的節點
-3.Pushgateway 可以"永遠push"相關節點给它的所有監控數據。看起來好像是優點，但是如果不需要監控了，Pushgateway還是會繼續push數據，並永遠暴露給Prometheus，就會導致Prometheus一直pull到舊數據，要解決這狀況只能手動清理Pushgateway不要的數據。
+1.如果將多個targets、jobs or instances的數據資料匯入到單一PushGateway做監視，容易使這PushGateway有單點失誤及潛在危險的風險。
+2.如果Prometheus pull up 的資訊，up資訊只會針對PushGateway, 不會pull到每個匯入資料節點的up資訊。
+3.Pushgateway 可以"永遠push"&永遠暴露給Prometheus"相關節點给它的所有監控數據。看起來好像是優點，但是如果不需要監控了，Pushgateway還是會繼續push數據&暴露給Prometheus，就會導致Prometheus一直pull到舊數據，要解決這狀況只能手動清理Pushgateway不要的數據。
 
 
 
@@ -50,9 +50,9 @@ Exporter 為 Client Library 開發的 HTTP server，用來曝露已有第三方�
 **4. AlertManager**
 ![image.png](/.attachments/image-721237a5-1159-46c0-91df-c97391bbb6ad.png)
 接收來至 Prometheus Server 的 Alert event ，並依據定義的 Notification 組態發送警報。
-Prometheus Server 中支援基於PromQL建立告警規則，如果滿足Prom QL定義的規則，則會產生一條告警。在AlertManager從 Prometheus server 端接收到 alerts後，會進行去除重複資料，分組，並路由到對收的接受方式，發出報警。常見的接收方式有：e-mail，pagerduty，webhook，slack 等。
+Prometheus Server 中支援基於PromQL建立告警規則，如果滿足PromQL定義的規則，則會產生一條告警。AlertManager從 Prometheus server 端接收到 alerts後，會進行去除重複資料，分組，並傳輸到指定的接受方式發出告警訊息。常見的接收方式有：e-mail，pagerduty，webhook，slack 等。
 
-關於 AlertManager 更詳細資料可到「告警系統」
+◎關於 AlertManager 更詳細資料可到「告警系統」
 
 
 
@@ -66,6 +66,14 @@ Service Discovery是自動檢測網絡上的設備和服務的過程，通過網
 
 ---
 # ● Prometheus運作方法
+1. Prometheus的基本原理是**通过HTTP**，**定期**pull被監控組件的狀態，任意组件只要提供對應的HTTP接口，即可被監控。
+首先，Prometheus Server中的Retrieval會定時採樣、收集及pull數據，要監控的數據資料可從4個地方來(如下圖)
+- [ ] 從 Jobs 或者 Exporters 中拉取 Metrics
+- [ ] 來自 Pushgateway 的 Metrics
+- [ ] 如有監控其他的 Prometheus Server的需求 ，因都有HTTP接口，所以也可拉取 Metrics。
+- [ ] Service discovery中發現的targets
+![image.png](/.attachments/image-bec00276-5d49-4ff2-b325-f7301324ee21.png)
+
 
 
 
