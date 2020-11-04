@@ -52,6 +52,7 @@
 ![image.png](/.attachments/image-b6ce41c3-e4f3-458e-b9b1-7c713ea82c20.png)
 <hr>
 以上只是更新好【login】的process變數設定，剩下的四個專案的更新步驟跟上面一樣，把他們都更新完成後，我們就完成變數的更新囉!
+</ol>
 
-#END
+#<center>END</center>
 
