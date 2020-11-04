@@ -3,28 +3,64 @@
 圖片來源：[Prometheus官網](https://prometheus.io/docs/introduction/overview/)
 
 從官網提供之架構圖可知，Prometheus 架構中是由多個元件組成，相關元件介紹如下：
-(P.S其中有些是選擇性的元件，依據自己產品或設計架構有所調整)
+(P.S其中有些是可選可不選的元件，依據自己產品或設計架構有所調整)
 
 **1. Prometheus Server**
+![image.png](/.attachments/image-2f7b0c23-bc8e-4982-b200-44f928296dda.png)
 為 Prometheus 的核心主程式，本身也是一個時間序列資料庫，負責整個監控集群的數據拉取、處理、計算和存儲。Prometheus Server 裡面包含三個模組：
 (1) Retrieval：負責採樣、定時收集及pull數據
 (2) TSDB：儲存時間序列資料於本地磁碟
-(3) HTTP Server：提供 http 服務接口查询，預設 prot 為9090
+(3) HTTP Server：提供 http 服務接口查询，預設 Port 為9090
+
+
+
+
 
 
 **2. Pushgateway (可選)**
-為 Prometheus 組件，類似代理服務概念，適合用於服務層面的 Metrics。 Pushgateway 存在的原因主要是"解決不支援或無法用 pull 方式獲取數據的情形"，例如：
-(1) 用於臨時性Job(Short-lived jobs)推送。有些 Job 存在期間較短，有可能 Prometheus 來 Pull 時就消失，因此透過一個閘道來推送，並讓 Prometheus 去 Pushgateway pull metrics。
-(2) 當網路環境不允許 Prometheus Server 和 Exporter 直接進行通訊時(ex：子網路or防火牆)，可以使用 PushGateway 來進行中轉(類似轉運站)。
-(3)如果有自己定義 shell 的腳本來監控服務健康狀態，可藉助 PushGateway 把對應數據按照 Prometheus 的格式 push 到 PushGateway。
+![image.png](/.attachments/image-191630a8-1845-49de-a23e-81bc45a0a56d.png)
+為 Prometheus 組件，類似代理服務概念，Pushgateway 存在的原因主要是"解決不支援或無法用 pull 方式獲取數據的情形"，例如：
+(1) 用於臨時性Job(Short-lived jobs)推送。有些 Job 存在期間較短，有可能 Prometheus 來 Pull 時就消失，因此需透過一個Pushgateway來推送，並讓 Prometheus 去 Pushgateway pull metrics。
 
-◎須留意：Prometheus只拉取使用者最後1次push的資料。如果客戶端一直沒有推送新的指標到 PushGateway ，那麼 Prometheus 將始終拉取最後推送上的資料，直到指標消失，預設是5分鐘。
+(2) 當網路環境不允許 Prometheus Server 和 Exporter 直接進行通訊時(ex：有子網路or防火牆)，可以使用 PushGateway 來進行中轉(可以想像成類似轉運站的概念)。
+
+(3)如果有自己定義 shell 的腳本來監控服務健康狀態，或有監控多項不同的數據，可藉助 PushGateway 把對應數據按照 Prometheus 的格式 push 到 PushGateway。
+
+◎須留意：
+Prometheus只拉取使用者最後1次push的資料。如果客戶端一直沒有推送新的指標到 PushGateway ，那麼 Prometheus 將始終拉取最後推送上的資料，預設是5分鐘。
+
+
+
+
 
 
 **3. Exporters/Jobs**
+![image.png](/.attachments/image-826bed33-f601-4408-a936-efe142747e2f.png)
 Exporter 為 Client Library 開發的 HTTP server，用來曝露已有第三方服務的 Metrics 給 Prometheus Server，只要符合接口格式，就可被採集Metrics。針對是否有直接支援Prometheus部分，Exporter分成2類：
 (1) 直接採集：直接內建對Prometheus支援，例如cAdvisor，Kubernetes，Etcd，Gokit等。
 (2) 間接採集：原有監控目標不直接支援Prometheus，因此需要通過Prometheus提供的Client Library編寫該監控目標的監控採集程式。例如：Mysql Exporter，JMX Exporter，Consul Exporter等
+
+
+
+
+
+**4. AlertManager**
+![image.png](/.attachments/image-721237a5-1159-46c0-91df-c97391bbb6ad.png)
+接收來至 Prometheus Server 的 Alert event ，並依據定義的 Notification 組態發送警報。
+Prometheus Server 中支援基於PromQL建立告警規則，如果滿足Prom QL定義的規則，則會產生一條告警。在AlertManager從 Prometheus server 端接收到 alerts後，會進行去除重複資料，分組，並路由到對收的接受方式，發出報警。常見的接收方式有：e-mail，pagerduty，webhook，slack 等。
+
+關於 AlertManager 更詳細資料可到「告警系統」
+
+# ● Prometheus適合用在?
+因Prometheus本身為時間序列資料庫 (TSDB，Time Series Database) ，再加上資料本身為多維度資料模型 (Multi-Dimensional Model) ，所以 Prometheus 很適合記錄任何純數字時間序列的資料。
+
+
+# ● Prometheus的侷限
+- [ ] 因Prometheus 是基於 Metric 的監控，所以不適用於日誌（Logs）、事件(Event)。
+- [ ] Prometheus 預設是 Pull 模型，如果需要抓到Push的資料需使用第三方服務幫忙，或搭配Pushgateway。
+
+
+
 
 
 
