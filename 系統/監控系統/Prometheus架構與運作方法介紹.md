@@ -54,6 +54,29 @@ Prometheus Server 中支援基於PromQL建立告警規則，如果滿足Prom QL�
 
 關於 AlertManager 更詳細資料可到「告警系統」
 
+
+
+
+**5. Service Discovery**
+Service Discovery是自動檢測網絡上的設備和服務的過程，通過網絡上的通用語言連接，服務端與客戶端雙方可允許設備或服務進行連接而無需任何手動干預。Prometheus支援多種自動發現機制，比如kuberbetes、DNS、consul、zookeeper、etcd等服務。
+
+
+
+
+
+---
+# ● Prometheus運作方法
+
+
+
+
+
+
+
+
+
+---
+
 # ● Prometheus適合用在?
 因Prometheus本身為時間序列資料庫 (TSDB，Time Series Database) ，再加上資料本身為多維度資料模型 (Multi-Dimensional Model) ，所以 Prometheus 很適合記錄任何純數字時間序列的資料。
 
