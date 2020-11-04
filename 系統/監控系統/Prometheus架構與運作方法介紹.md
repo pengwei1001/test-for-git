@@ -7,7 +7,8 @@
 
 **1. Prometheus Server**
 ![image.png](/.attachments/image-2f7b0c23-bc8e-4982-b200-44f928296dda.png)
-為 Prometheus 的核心主程式，本身也是一個時間序列資料庫，負責整個監控集群的數據拉取、處理、計算和存儲。Prometheus Server 裡面包含三個模組：
+為 Prometheus 的核心主程式，本身也是一個時間序列資料庫，負責整個監控集群的數據拉取、處理、計算和存儲。
+Prometheus Server 裡面包含三個模組如下：
 (1) Retrieval：負責採樣、定時收集及pull數據
 (2) TSDB：儲存時間序列資料於本地磁碟
 (3) HTTP Server：提供 http 服務接口查询，預設 Port 為9090
@@ -19,15 +20,17 @@
 
 **2. Pushgateway (可選)**
 ![image.png](/.attachments/image-191630a8-1845-49de-a23e-81bc45a0a56d.png)
-為 Prometheus 組件，類似代理服務概念，Pushgateway 存在的原因主要是"解決不支援或無法用 pull 方式獲取數據的情形"，例如：
+為 Prometheus 組件，類似代理服務概念，Pushgateway 存在的原因主要是為了解決"不支援或無法用 pull 方式獲取數據的情形"，例如：
 (1) 用於臨時性Job(Short-lived jobs)推送。有些 Job 存在期間較短，有可能 Prometheus 來 Pull 時就消失，因此需透過一個Pushgateway來推送，並讓 Prometheus 去 Pushgateway pull metrics。
 
-(2) 當網路環境不允許 Prometheus Server 和 Exporter 直接進行通訊時(ex：有子網路or防火牆)，可以使用 PushGateway 來進行中轉(可以想像成類似轉運站的概念)。
+(2) 當網路環境不允許 Prometheus Server 和 Exporter 直接進行通訊時(ex：在不同的子網路or防火牆)，就可使用 PushGateway 來進行中轉(可想像成類似轉運站的概念)。
 
 (3)如果有自己定義 shell 的腳本來監控服務健康狀態，或有監控多項不同的數據，可藉助 PushGateway 把對應數據按照 Prometheus 的格式 push 到 PushGateway。
 
-◎須留意：
-Prometheus只拉取使用者最後1次push的資料。如果客戶端一直沒有推送新的指標到 PushGateway ，那麼 Prometheus 將始終拉取最後推送上的資料，預設是5分鐘。
+但是官網建議在上述幾種狀況用 PushGateway 即可，如太常使用的話可能會有影響(須留意)：
+1.如果將多個targets、jobs or instances的數據資料匯入到單一PushGateway做監視，容易使這PushGateway有單一失誤及潛在危險的風險
+2.如果Prometheus pull up 的資訊，up資訊只會針對PushGateway, 不會針對每個匯入資料的節點
+3.Pushgateway 可以"永遠push"相關節點给它的所有監控數據。看起來好像是優點，但是如果不需要監控了，Pushgateway還是會繼續push數據，並永遠暴露給Prometheus，就會導致Prometheus一直pull到舊數據，要解決這狀況只能手動清理Pushgateway不要的數據。
 
 
 
