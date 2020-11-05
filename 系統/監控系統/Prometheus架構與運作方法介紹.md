@@ -1,3 +1,34 @@
+在看這篇文件前，建議先了解一些專有名詞及概念會比較好理解
+
+- [ ] Metrics：度量、指標
+可從兩種定義去理解Metrics這概念
+Google Analytics服務裡面對Metrics的定義為：Metrics是資料的量化評估方式。是指維度中可透過總計或比率方式衡量評估的個別元素。[(引用來源)](https://support.google.com/analytics/answer/6086087?hl=zh-Hant&ref_topic=6083659)
+IEEE的軟體工程術語標準辭典(IEEE Standard Glossary of Software Engineering Terms)中對metric(度量)的定義：系統、元件或過程具有給定屬性程度的定量測量。[(引用來源)](http://www.mit.jyu.fi/ope/kurssit/TIES462/Materiaalit/IEEE_SoftwareEngGlossary.pdf)
+
+從上面兩種定義敘述，Metrics(指標)可理解成"給予特殊屬性或定義，並計算出數值，並可從這數值了解資料、或系統的狀況，進而評估接下來的改善方式"
+
+例如說，Prometheus中的其中一個Metric為"prometheus_tsdb_reloads_total"，那這Metric所計算出來的數值為"計算TSDB reloads的總數"，那就可以根據這數值判斷TSDB的狀況並看接下來有何改善方式。
+
+
+
+
+- [ ] TSDB(Time Series Database)：時間序列資料庫
+針對時間戳或時間序列數據進行優化的數據庫。時間序列數據隨時間跟踪，監視，下採樣和聚合的測量或事件。
+
+- [ ] Multi-Dimensional Model：多維度資料模型
+資料結構型態：Cube
+使用維度(Dimension)和量值(Measure)為基礎
+維度 (Dimension)：資料庫中的設計是一個表格 (Table)，是物件的敘述性屬性或特性，可以有不同的值。
+量值 (Measure) 資料庫中的Fact Table
+較高的可擴展性
+要為成熟的資料模型架構
+從使用者觀點出發，依照資料使用的視角或資料分析的維度來設計資料結構
+較為困難且複雜
+
+
+---
+
+
 # ● 架構與相關元件
 ![image.png](/.attachments/image-19eba535-8d5b-4fcb-a6cc-fa6bfb40d11a.png)
 圖片來源：[Prometheus官網](https://prometheus.io/docs/introduction/overview/)
@@ -70,7 +101,7 @@ Service Discovery是自動檢測網絡上的設備和服務的過程，通過網
 首先，Prometheus Server中的Retrieval會定時採樣、收集及pull數據，要監控的數據資料可從4個地方來(如下圖)
 - [ ] 從 Jobs 或者 Exporters 中拉取 Metrics
 - [ ] 來自 Pushgateway 的 Metrics
-- [ ] 如有監控其他的 Prometheus Server的需求 ，因都有HTTP接口，所以也可拉取 Metrics。
+- [ ] 如有監控其他的 Prometheus Server 的需求 ，因都有HTTP接口，所以也可從被監控的 Prometheus Server 拉取 Metrics。
 - [ ] Service discovery中發現的targets
 ![image.png](/.attachments/image-bec00276-5d49-4ff2-b325-f7301324ee21.png)
 
