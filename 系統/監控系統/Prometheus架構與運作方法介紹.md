@@ -1,3 +1,4 @@
+# ◎ 前言
 在看這篇文件前，建議先了解一些專有名詞及概念會比較好理解
 
 - [ ] Metrics：度量、指標
@@ -23,7 +24,7 @@ IEEE的軟體工程術語標準辭典(IEEE Standard Glossary of Software Enginee
 ---
 
 
-# ● 架構與相關元件
+# ◎ 架構與相關元件
 ![image.png](/.attachments/image-19eba535-8d5b-4fcb-a6cc-fa6bfb40d11a.png)
 圖片來源：[Prometheus官網](https://prometheus.io/docs/introduction/overview/)
 
@@ -90,7 +91,7 @@ Service Discovery是自動檢測網絡上的設備和服務的過程，通過網
 
 
 ---
-# ● Prometheus運作方法
+# ◎ Prometheus運作方法
 1. Prometheus的基本原理是**通过HTTP**，**定期**pull被監控組件的狀態，任意组件只要提供對應的HTTP接口，即可被監控。
 首先，Prometheus Server中的Retrieval會定時採樣、收集及pull數據，要監控的數據資料可從4個地方來(如下圖)
 - [ ] 從 Jobs 或者 Exporters 中拉取 Metrics
@@ -126,12 +127,14 @@ Service Discovery是自動檢測網絡上的設備和服務的過程，通過網
 
 
 ---
+由上面的架構跟運作方法，我們可以知道：
 
-# ● Prometheus適合用在?
+
+# ◎ Prometheus適合用在?
 因Prometheus本身為時間序列資料庫 (TSDB，Time Series Database) ，再加上資料本身為多維度資料模型 (Multi-Dimensional Model) ，所以 Prometheus 很適合記錄任何純數字時間序列的資料。
 
 
-# ● Prometheus的侷限
+# ◎ Prometheus的侷限
 - [ ] 因Prometheus 是基於 Metric 的監控，所以不適用於日誌（Logs）、事件(Event)。
 - [ ] Prometheus 預設是 Pull 模型，如果需要抓到Push的資料需使用第三方服務幫忙，或搭配Pushgateway。
 
