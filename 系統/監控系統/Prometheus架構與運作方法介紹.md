@@ -16,15 +16,9 @@ IEEE的軟體工程術語標準辭典(IEEE Standard Glossary of Software Enginee
 針對時間戳記(Timestamp)或時間序列數據進行優化，經過優化後，專門用來儲存與管理時間序列資料(Time Series Data)的資料庫系統。
 
 - [ ] Multi-Dimensional Model：多維度資料模型
-資料結構型態：Cube
-使用維度(Dimension)和量值(Measure)為基礎
-維度 (Dimension)：資料庫中的設計是一個表格 (Table)，是物件的敘述性屬性或特性，可以有不同的值。
-量值 (Measure) 資料庫中的Fact Table
-較高的可擴展性
-要為成熟的資料模型架構
-從使用者觀點出發，依照資料使用的視角或資料分析的維度來設計資料結構
-較為困難且複雜
-
+一般的資料結構通常是Tabular Model（表格式資料模型），使用傳統的表格然後多個表格關聯
+但多維度資料結構型態為Cube(可想像成正方體)，使用維度(Dimension)和量值(Measure)為基礎
+相較之下多維度資料模型具有較高的可擴展性，但也較為困難且複雜
 
 ---
 
@@ -105,23 +99,30 @@ Service Discovery是自動檢測網絡上的設備和服務的過程，通過網
 - [ ] Service discovery中發現的targets
 ![image.png](/.attachments/image-bec00276-5d49-4ff2-b325-f7301324ee21.png)
 
+
+
+
+
 2. Retrieval收集數據後，就會把數據資料傳給TSDB，TSDB再做以下事情
 ![image.png](/.attachments/image-944cf4df-b993-4c56-b75e-25db44721f09.png)
 - [ ] 數據處理：根據配置的數據格式或者標籤做轉換/刪除等操作。
 - [ ] 根據已定義好的alert.rule中進行計算&判斷：例如rule裡面有條告警規則定義是"CPU使用率達到80%"，那 TSDB 會對數據進行計算看是否符合告警定義，如果符合，則發送警告給 AlertManager ；如不符合就不做操作。
 - [ ] 存儲資料：完成上面的一些操作之後，TSDB 會根據配置時間周期保存數據到Local端或者是第三方存儲中。
 
+
+
+
+
 3. Alertmanager 接收到 Prometheus Server 之告警後，依據配置文件進行告警發送(可發送給E-mail、Slack 等)、分組、調度、警告抑制等處理。
+◎關於 AlertManager 更詳細資料可到「告警系統」
 ![image.png](/.attachments/image-38009904-ff3c-461a-a902-243e7dd58538.png)
+
+
+
+
 
 4. 透過 PromQL 語法進行查詢，再將資料給 Web UI or Dashboard，例如Grafana、自己的Promdash以及自身提供的模版引擎等等。
 ![image.png](/.attachments/image-3077f114-149b-4824-a447-fe7c317b813f.png)
-
-
-
-
-
-
 
 
 ---
