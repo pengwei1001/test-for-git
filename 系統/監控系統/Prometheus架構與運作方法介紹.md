@@ -114,13 +114,8 @@ Service Discovery是自動檢測網絡上的設備和服務的過程，通過網
 3. Alertmanager 接收到 Prometheus Server 之告警後，依據配置文件進行告警發送(可發送給E-mail、Slack 等)、分組、調度、警告抑制等處理。
 ![image.png](/.attachments/image-38009904-ff3c-461a-a902-243e7dd58538.png)
 
-Prometheus通过PromQL和其他API可视化地展示收集的数据。Prometheus支持很多方式的图表可视化，例如Grafana、自带的Promdash以及自身提供的模版引擎等等。Prometheus还提供HTTP API的查询方式，自定义所需要的输出。
-AlertManager 根據組態檔案來對接受到的 Alert event 進行處理，然後發送警報。
-在視覺化介面呈現採集資料。
-Prometheus Server 拉取 Exporter 資料，然後透過 PromQL 語法進行查詢，再將資料給 Web UI or Dashboard。
-Prometheus Server 觸發 Alert Definition 定義的事件，並發送給 AelertManager
-AlertManager 依據設定發送警報給 E-mail、Slack 等等。
-
+4. 透過 PromQL 語法進行查詢，再將資料給 Web UI or Dashboard，例如Grafana、自己的Promdash以及自身提供的模版引擎等等。
+![image.png](/.attachments/image-3077f114-149b-4824-a447-fe7c317b813f.png)
 
 
 
