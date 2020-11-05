@@ -105,7 +105,11 @@ Service Discovery是自動檢測網絡上的設備和服務的過程，通過網
 - [ ] Service discovery中發現的targets
 ![image.png](/.attachments/image-bec00276-5d49-4ff2-b325-f7301324ee21.png)
 
-
+Retrieval收集數據後，就會把數據資料傳給TSDB，TSDB再做以下事情
+![image.png](/.attachments/image-944cf4df-b993-4c56-b75e-25db44721f09.png)
+- [ ] 數據處理：根據配置的數據格式或者標籤做轉換/刪除等操作。
+- [ ] 根據已定義好的alert.rule中進行計算&判斷：例如rule裡面有條告警規則定義是"CPU使用率達到80%"，那 Prometheus 會對數據進行計算看是否符合告警定義，如果符合，則發送警告給 AlertManager ，否則不做操作。
+- [ ] 存儲資料：完成上面的一些操作之後，Prometheus 會根據配置時間周期保存數據到Local端或者是第三方存儲中。
 
 
 
