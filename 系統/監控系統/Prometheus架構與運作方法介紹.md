@@ -12,8 +12,8 @@ IEEE的軟體工程術語標準辭典(IEEE Standard Glossary of Software Enginee
 
 
 
-- [ ] TSDB(Time Series Database)：時間序列資料庫
-針對時間戳或時間序列數據進行優化的數據庫。時間序列數據隨時間跟踪，監視，下採樣和聚合的測量或事件。
+- [ ] [TSDB(Time Series Database)](https://en.wikipedia.org/wiki/Time_series_database)：時間序列資料庫
+針對時間戳記(Timestamp)或時間序列數據進行優化，經過優化後，專門用來儲存與管理時間序列資料(Time Series Data)的資料庫系統。
 
 - [ ] Multi-Dimensional Model：多維度資料模型
 資料結構型態：Cube
