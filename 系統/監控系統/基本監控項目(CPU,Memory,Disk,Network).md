@@ -24,14 +24,14 @@
 5.總計(Total)：總CPU利用率，以實例CPU資源的百分比表示。
 
 ## ◎ Disk
-Disk身為儲存資料的地方，當然看"剩餘空間"就很重要啦，另外Disk的I/O相關數據也很重要，目前GCP提供的Metric如下：
+Disk身為儲存資料的地方，當然看"剩餘空間"就很重要啦，另外Disk的I/O相關數據也很重要，目前GCP提供關於Disk的監控細項如下：
 1.Disk 使用情況(bytes_used)
 2.Disk I/O時間(io_time)
 3.Disk 利用率(percent_used)
 4.Disk 讀寫次數(write/read_bytes_count)
 
 ◎ Network
-Network部分相較之下就比較多元，包含要注意流量、Port connection的狀況、封包(packet)傳輸接收的情形等，目前GCP提供的Metric如下：
+Network部分相較之下就比較多元，包含要注意流量、Port connection的狀況、封包(packet)傳輸接收的情形等，目前GCP提供關於Network的監控細項如下：
 1.Port使用狀況(port_usage)
 2.網路request數量(network/request_count)
 3.TCP連接狀態(tcp_connections)
@@ -43,7 +43,7 @@ Network部分相較之下就比較多元，包含要注意流量、Port connecti
 
 ◎ Memory
 關於GCP的memory，雖然GCP提供實例的CPU，Network和Disk使用情況的Metric，但**預設狀況下GCP不提供memory的Metric**。
-為了讓使用者可以監控GCP實例的Memory Metric，必須在實例上安裝Stackdriver代理。Stackdriver提供關於Memory的Metric如下：
+為了讓使用者可以監控GCP實例的Memory Metric，必須在實例上安裝Stackdriver代理。Stackdriver提供關於Memory的監控細項如下：
 1.記憶體使用率(memory_usage)
 2.快取記憶體大小(cache_memory_usage)
 
