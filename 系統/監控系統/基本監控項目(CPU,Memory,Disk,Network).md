@@ -15,6 +15,17 @@
 
 因基本上不管任何系統產品或服務，都會有這4項基本的監控資源，所以先以這4大項做細部解說
 
+---
+
+在這邊要先講一件重要的概念，就是GCP對於VM層級和GKE層級的監控項目略有不同喔~
+
+如果在VM instanes上要觀察Memory的話，就會出現**您必須安裝 Cloud Monitoring 代理程式，才能取得記憶體用量指標。**的提醒訊息(如下圖)，但GKE可以觀察到Memory相關資訊。
+
+![image.png](/.attachments/image-b869f9a2-3f74-4720-9f75-4b8966bce169.png)
+
+
+---
+
 ## ◎ CPU
 如果是在以前實體機或VM的時候，CPU可以監控的細項非常之多，包含使用率、user time、system time、wait、idle、nice、context switch等，但因產品為全雲端(GCP)，所以根據[Google Spanner文件](https://cloud.google.com/spanner/docs/cpu-utilization?hl=zh-tw)所述，GCP上的CPU監控主要就針對**CPU使用率**為主，關於Metric的部分，GCP大致上會提供以下指標：
 1.CPU使用率(cpu_usage)(包含user & system使用率)
@@ -43,7 +54,7 @@ Network部分相較之下就比較多元，包含要注意流量、Port connecti
 
 ◎ Memory
 關於GCP的memory，雖然GCP提供實例的CPU，Network和Disk使用情況的Metric，但**預設狀況下GCP不提供memory的Metric**。
-為了讓使用者可以監控GCP實例的Memory Metric，必須在實例上安裝Stackdriver代理。Stackdriver提供關於Memory的監控細項如下：
+為了讓使用者可以監控GCP實例的Memory Metric，必須在安裝Cloud Monitoring 代理程式才能監控，但GKE可直接監控Memory的狀況，相關於Memory監控細項如下：
 1.記憶體使用率(memory_usage)
 2.快取記憶體大小(cache_memory_usage)
 
