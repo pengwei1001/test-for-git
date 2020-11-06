@@ -24,6 +24,10 @@
 ![image.png](/.attachments/image-b869f9a2-3f74-4720-9f75-4b8966bce169.png)
 
 
+GKE就會顯示CPU、Memory、Disk的使用率(如下圖，以rd1的環境為例)
+
+![image.png](/.attachments/image-491dd56c-f778-4121-a30a-338934ee79d2.png)
+
 ---
 
 ## ◎ CPU
