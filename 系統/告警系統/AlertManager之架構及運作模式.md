@@ -8,7 +8,7 @@ AlertManager，顧名思義就是"管理Alert"，Prometheus 的警報分為兩�
 
 由上得知一個很重要的觀念，就是
 
-** Alertmanager 本身是不做告警規則計算的**
+**Alertmanager本身是不做告警規則計算的**
 
 意思是說，告警規則計算是由 Prometheus Server 負責， Alertmanager 只是在接收 Prometheus Server 發來的消息，然後結合自己的配置，比如等待時間，重複發送告警時間，路由匹配等項目，然後把接收到的消息發送到指定的接收者。
 
