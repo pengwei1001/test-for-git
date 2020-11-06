@@ -31,12 +31,14 @@ Disk身為儲存資料的地方，當然看"剩餘空間"就很重要啦，另�
 4.Disk 讀寫次數(write/read_bytes_count)
 
 ◎ Network
-Network部分相較之下就比較多元，
-1.網路流量(network)
+Network部分相較之下就比較多元，包含要注意流量、Port connection的狀況、封包(packet)傳輸接收的情形等，目前GCP提供的Metric如下：
+1.Port使用狀況(port_usage)
 2.網路request數量(network/request_count)
 3.TCP連接狀態(tcp_connections)
-4.網路封包的接收與傳送數量(received/sent_packets_count)
-
+4.網路封包(packets)的接收與傳送數量(received/sent_packets_count)
+5.網路封包(packets)被丟棄的數量(dropped_packets_count)(有可能因為firewall的關係導致packet被丟棄)
+6.HTTP request & response 的個數(request/response_count)
+7.HTTP狀態(http_status)
 
 
 ◎ Memory
