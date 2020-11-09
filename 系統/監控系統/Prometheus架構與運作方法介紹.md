@@ -2,13 +2,13 @@
 在看這篇文件前，建議先了解一些專有名詞及概念會比較好理解
 
 - [ ] Metrics：度量、指標
-我們可先從兩種定義去理解Metrics這概念：
-- [ ] Google Analytics服務裡面對Metrics的定義為：Metrics是資料的量化評估方式。是指維度中可透過總計或比率方式衡量評估的個別元素。[(引用來源)](https://support.google.com/analytics/answer/6086087?hl=zh-Hant&ref_topic=6083659)
-- [ ] IEEE的軟體工程術語標準辭典(IEEE Standard Glossary of Software Engineering Terms)中對metric(度量)的定義：系統、元件或過程具有給定屬性程度的定量測量。[(引用來源)](http://www.mit.jyu.fi/ope/kurssit/TIES462/Materiaalit/IEEE_SoftwareEngGlossary.pdf)
+我們可先從2種定義去理解 Metrics 這概念：
+- [ ] Google Analytics 服務裡面對 Metrics 的定義為：Metrics 是資料的量化評估方式。是指維度中可透過總計或比率方式衡量評估的個別元素。[(引用來源)](https://support.google.com/analytics/answer/6086087?hl=zh-Hant&ref_topic=6083659)
+- [ ] IEEE的軟體工程術語標準辭典(IEEE Standard Glossary of Software Engineering Terms)中對 metric (度量)的定義：系統、元件或過程具有給定屬性程度的定量測量。[(引用來源)](http://www.mit.jyu.fi/ope/kurssit/TIES462/Materiaalit/IEEE_SoftwareEngGlossary.pdf)
 
-從上面兩種定義敘述，Metrics(指標)可理解成"給予特殊屬性或定義，並計算出數值，並可從這數值了解資料、或系統的狀況，進而評估接下來的改善方式"
+從上面兩種定義敘述， Metrics (指標)可理解成"給予特殊屬性或定義，並計算出數值，並可從這數值了解資料、或系統的狀況，進而評估接下來的改善方式"
 
-例如說，Prometheus中的其中一個Metric為"prometheus_tsdb_reloads_total"，那這Metric所計算出來的數值為"計算TSDB reloads的總數"，那就可以根據這數值判斷TSDB的狀況並看接下來有何改善方式。
+例如說， Prometheus 中的其中1個 Metric 為"prometheus_tsdb_reloads_total"，那這 Metric 所計算出來的數值為"計算 TSDB reloads 的總數"，那就可以根據這數值判斷 TSDB 的狀況並看接下來有何改善方式。
 
 
 
@@ -33,8 +33,8 @@
 
 **1. Prometheus Server**
 ![image.png](/.attachments/image-2f7b0c23-bc8e-4982-b200-44f928296dda.png)
-為 Prometheus 的核心主程式，本身也是一個時間序列資料庫，負責整個監控集群的數據拉取、處理、計算和存儲。
-Prometheus Server 裡面包含三個模組如下：
+為 Prometheus 的核心主程式，本身也是1個時間序列資料庫，負責整個監控集群的數據拉取、處理、計算和存儲。
+Prometheus Server 裡面包含3個模組如下：
 (1) Retrieval：負責定時收集及pull數據。
 (2) TSDB：儲存時間序列資料於本地磁碟。
 (3) HTTP Server：提供 http 服務接口查詢，預設 Port 為9090。
@@ -48,19 +48,19 @@ Prometheus Server 裡面包含三個模組如下：
 ![image.png](/.attachments/image-69991ab3-3588-4bf9-9353-6ab344b11451.png)
 為 Prometheus 組件，類似代理服務概念，Pushgateway 存在的原因主要是為了解決"不支援或無法用 pull 方式獲取數據的情形"，例如：
 (1) 用於臨時性Job(Short-lived jobs)推送(最大宗)。
-有些 Job 存在期間較短，有可能 Prometheus 來 Pull 時就消失，因此需透過一個Pushgateway來推送，並讓 Prometheus 去 Pushgateway pull metrics。
+有些 Job 存在期間較短，有可能 Prometheus 來 Pull 時就消失，因此需透過1個 Pushgateway 來推送，並讓 Prometheus 去 Pushgateway pull metrics。
 
 (2) 當網路環境不允許 Prometheus Server 和 Exporter 直接進行資料數據pull的時候(ex：在不同的子網路or防火牆)，就可使用 PushGateway 來進行轉運資料(可想像成類似轉運站的概念)。
 
-(3)如果有"自己定義 shell 的腳本"來監控服務健康狀態，因自己定義shell的腳本可能會不符合Prometheus的定義，所以也可使用Pushgetway將資料push上去。
-(不過如果是都要自己定義shell腳本的話，那通常都會寫exporter，所以第3種狀況不太會用Pushgetway來處理XD")
+(3)如果有"自己定義 shell 的腳本"來監控服務健康狀態，因自己定義shell的腳本可能會不符合Prometheus的定義，所以也可使用 Pushgetway 將資料push上去。
+(不過如果是都要自己定義shell腳本的話，那通常都會寫exporter，所以第3種狀況不太會用 Pushgetway 來處理XD")
 
 但是官網建議在上述幾種狀況用 PushGateway 即可，如太常使用的話可能會有影響，須留意~!：
-1.如果將多個targets、jobs or instances的數據資料匯入到單一PushGateway做監視，容易使這PushGateway有單點失誤及潛在危險的風險。
+1.如果將多個targets、jobs or instances的數據資料匯入到單一 PushGateway 做監視，容易使這 PushGateway 有單點失誤及潛在危險的風險。
 
-2.如果Prometheus pull "up" 的資訊(順便解釋一下，up的意思就是指那機器是否有on起來)，只會pull到PushGateway的up資訊，無法去細分說在Pushgetway之前的節點up資訊為何。
+2.如果Prometheus pull "up" 的資訊(up的 Metric 意義：指那機器是否有on起來)，只會pull到 PushGateway 的up資訊，無法去細分說在 Pushgetway 之前的節點up資訊為何。
 
-3.Pushgateway 可以"永遠push監控資料"&永遠暴露給Prometheus"，看起來好像是優點，但是，如果需要push到Pushgetway的資料不需要監控了，Pushgateway還是會繼續push數據&暴露給Prometheus，就會導致Prometheus一直pull到不必要的數據。要解決這狀況，只能手動清理並釐清有哪些資料需要push到Pushgateway。
+3.Pushgateway 可以"永遠 push 監控資料"&永遠暴露給 Prometheus "，看起來好像是優點，但是，如果需要 push 到 Pushgetway 的資料不需要監控了， Pushgateway 還是會繼續 push 數據&暴露給 Prometheus ，就會導致 Prometheus 一直 pull 到不必要的數據。要解決這狀況，只能手動清理並釐清有哪些資料需要 push 到 Pushgateway 。
 
 
 
@@ -69,9 +69,9 @@ Prometheus Server 裡面包含三個模組如下：
 
 **3. Exporters/Jobs**
 ![image.png](/.attachments/image-b76482ac-e8bd-4120-8852-d5cba68d4e57.png)
-Exporter 為第三方 Client Library 開發的 HTTP server，用來曝露已有第三方服務的 Metrics 給 Prometheus Server，只要符合Prometheus的接口格式，就可被採集Metrics。針對是否有直接支援Prometheus部分，Exporter分成2類：
-(1) 直接採集：直接內建對Prometheus支援，例如cAdvisor，Kubernetes，Etcd等。
-(2) 間接採集：原有監控目標不直接支援Prometheus，因此需要通過官方或第三方提供exporter，才能監控目標並採集資料。例如：要監控Mysql的話需要 Mysql Exporter，要監控Nginx則需要nginx-prometheus-exporter等。
+Exporter 為第三方 Client Library 開發的 HTTP server，用來曝露已有第三方服務的 Metrics 給 Prometheus Server，只要符合 Prometheus 的接口格式，就可被採集 Metrics 。針對是否有直接支援 Prometheus 部分，Exporter 分成2類：
+(1) 直接採集：直接內建對 Prometheus 支援，例如 cAdvisor，Kubernetes，Etcd 等。
+(2) 間接採集：原有監控目標不直接支援 Prometheus ，因此需要通過官方或第三方提供 exporter，才能監控目標並採集資料。例如：要監控 Mysql 的話需要 Mysql Exporter，要監控 Nginx 則需要 nginx-prometheus-exporter 等。
 
 
 
@@ -87,7 +87,7 @@ Exporter 為第三方 Client Library 開發的 HTTP server，用來曝露已有�
 
 
 **5. Service Discovery**
-Service Discovery是自動檢測網絡上的設備和服務的過程，通過網絡上的通用語言連接，服務端與客戶端雙方可允許設備或服務進行連接而無需任何手動干預。Prometheus支援多種自動發現機制，比如kuberbetes、DNS、consul、zookeeper、etcd等服務。
+Service Discovery 是自動檢測網絡上的設備和服務的過程，通過網絡上的通用語言連接，服務端與客戶端雙方可允許設備或服務進行連接而無需任何手動干預。Prometheus 支援多種自動發現機制，比如kuberbetes、DNS、consul、zookeeper、etcd等服務。
 
 
 
@@ -95,23 +95,23 @@ Service Discovery是自動檢測網絡上的設備和服務的過程，通過網
 
 ---
 # ◎ Prometheus運作方法
-1. Prometheus的基本原理是**通過HTTP**，**定期**pull被監控組件的狀態，任意组件只要提供對應的HTTP接口，即可被監控。
-首先，Prometheus Server中的Retrieval會定時採樣、收集及pull數據，要監控的數據資料可從4個地方來(如下圖)
+1. Prometheus 的基本原理是**通過HTTP**，**定期**pull被監控組件的狀態，任意组件只要提供對應的HTTP接口，即可被監控。
+首先，Prometheus Server 中的 Retrieval 會定時採樣、收集及pull數據，要監控的數據資料可從4個地方來(如下圖)
 - [ ] 從 Jobs 或者 Exporters 中拉取 Metrics
 - [ ] 來自 Pushgateway 的 Metrics
-- [ ] 如有監控其他的 Prometheus Server 的需求 ，因都有HTTP接口，所以也可從被監控的 Prometheus Server 拉取 Metrics。
-- [ ] Service discovery中發現的targets
+- [ ] 如有監控其他的 Prometheus Server 的需求，因都有HTTP接口，所以也可從被監控的 Prometheus Server 拉取 Metrics。
+- [ ] Service discovery 中發現的targets
 ![image.png](/.attachments/image-bec00276-5d49-4ff2-b325-f7301324ee21.png)
 
 
 
 
 
-2. Retrieval收集數據後，就會把數據資料傳給TSDB，TSDB再做以下事情
+2. Retrieval 收集數據後，就會把數據資料傳給TSDB，TSDB再做以下事情
 ![image.png](/.attachments/image-944cf4df-b993-4c56-b75e-25db44721f09.png)
 - [ ] 數據處理：根據配置的數據格式或者標籤做轉換/刪除等操作。
 - [ ] 根據已定義好的alert.rule中進行計算&判斷：例如rule裡面有條告警規則定義是"CPU使用率達到80%"，那 TSDB 會對數據進行計算看是否符合告警定義，如果符合，則發送警告給 AlertManager ；如不符合就不做操作。
-- [ ] 存儲資料：完成上面的一些操作之後，TSDB 會根據配置時間周期保存數據到Local端或者是第三方存儲中。
+- [ ] 存儲資料：完成上面的操作之後，TSDB 會根據配置時間周期保存數據到Local端或者是第三方存儲中。
 
 
 
@@ -125,7 +125,7 @@ Service Discovery是自動檢測網絡上的設備和服務的過程，通過網
 
 
 
-4. 透過 PromQL 語法進行查詢，再將資料給 Web UI or Dashboard，例如Grafana、Promethrus自己的UI介面等。
+4. 視覺化的部分，則是透過 PromQL 語法進行查詢，查詢後再將資料給 Web UI or Dashboard，例如 Prometheus 自己的UI介面、Grafana等。(目前最推薦的是Prometheus+Grafana這組合)
 ![image.png](/.attachments/image-3077f114-149b-4824-a447-fe7c317b813f.png)
 
 
