@@ -68,10 +68,10 @@ Prometheus Server 裡面包含三個模組如下：
 
 
 **3. Exporters/Jobs**
-![image.png](/.attachments/image-826bed33-f601-4408-a936-efe142747e2f.png)
-Exporter 為 Client Library 開發的 HTTP server，用來曝露已有第三方服務的 Metrics 給 Prometheus Server，只要符合接口格式，就可被採集Metrics。針對是否有直接支援Prometheus部分，Exporter分成2類：
-(1) 直接採集：直接內建對Prometheus支援，例如cAdvisor，Kubernetes，Etcd，Gokit等。
-(2) 間接採集：原有監控目標不直接支援Prometheus，因此需要通過Prometheus提供的Client Library編寫該監控目標的監控採集程式。例如：Mysql Exporter，JMX Exporter，Consul Exporter等
+![image.png](/.attachments/image-b76482ac-e8bd-4120-8852-d5cba68d4e57.png)
+Exporter 為第三方 Client Library 開發的 HTTP server，用來曝露已有第三方服務的 Metrics 給 Prometheus Server，只要符合Prometheus的接口格式，就可被採集Metrics。針對是否有直接支援Prometheus部分，Exporter分成2類：
+(1) 直接採集：直接內建對Prometheus支援，例如cAdvisor，Kubernetes，Etcd等。
+(2) 間接採集：原有監控目標不直接支援Prometheus，因此需要通過官方或第三方提供exporter，才能監控目標並採集資料。例如：要監控Mysql的話需要 Mysql Exporter，要監控Nginx則需要nginx-prometheus-exporter等。
 
 
 
@@ -79,8 +79,7 @@ Exporter 為 Client Library 開發的 HTTP server，用來曝露已有第三方�
 
 **4. AlertManager**
 ![image.png](/.attachments/image-721237a5-1159-46c0-91df-c97391bbb6ad.png)
-接收來至 Prometheus Server 的 Alert event ，並依據定義的 Notification 組態發送警報。
-Prometheus Server 中支援基於PromQL建立告警規則，如果滿足PromQL定義的規則，則會產生一條告警。AlertManager從 Prometheus server 端接收到 alerts後，會進行去除重複資料，分組，並傳輸到指定的接受方式發出告警訊息。常見的接收方式有：e-mail，pagerduty，webhook，slack 等。
+接收來至 Prometheus Server 的 Alert event ，並依據定義的 Notification 組態發送警報，常見的接收方式有：e-mail，pagerduty，webhook，slack 等。
 
 ◎關於 AlertManager 更詳細資料可到「告警系統」
 
