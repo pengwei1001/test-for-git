@@ -2,9 +2,9 @@
 在看這篇文件前，建議先了解一些專有名詞及概念會比較好理解
 
 - [ ] Metrics：度量、指標
-可從兩種定義去理解Metrics這概念
-Google Analytics服務裡面對Metrics的定義為：Metrics是資料的量化評估方式。是指維度中可透過總計或比率方式衡量評估的個別元素。[(引用來源)](https://support.google.com/analytics/answer/6086087?hl=zh-Hant&ref_topic=6083659)
-IEEE的軟體工程術語標準辭典(IEEE Standard Glossary of Software Engineering Terms)中對metric(度量)的定義：系統、元件或過程具有給定屬性程度的定量測量。[(引用來源)](http://www.mit.jyu.fi/ope/kurssit/TIES462/Materiaalit/IEEE_SoftwareEngGlossary.pdf)
+我們可先從兩種定義去理解Metrics這概念：
+- [ ] Google Analytics服務裡面對Metrics的定義為：Metrics是資料的量化評估方式。是指維度中可透過總計或比率方式衡量評估的個別元素。[(引用來源)](https://support.google.com/analytics/answer/6086087?hl=zh-Hant&ref_topic=6083659)
+- [ ] IEEE的軟體工程術語標準辭典(IEEE Standard Glossary of Software Engineering Terms)中對metric(度量)的定義：系統、元件或過程具有給定屬性程度的定量測量。[(引用來源)](http://www.mit.jyu.fi/ope/kurssit/TIES462/Materiaalit/IEEE_SoftwareEngGlossary.pdf)
 
 從上面兩種定義敘述，Metrics(指標)可理解成"給予特殊屬性或定義，並計算出數值，並可從這數值了解資料、或系統的狀況，進而評估接下來的改善方式"
 
@@ -17,9 +17,9 @@ IEEE的軟體工程術語標準辭典(IEEE Standard Glossary of Software Enginee
 針對時間戳記(Timestamp)或時間序列數據進行優化，經過優化後，專門用來儲存與管理時間序列資料(Time Series Data)的資料庫系統。
 
 - [ ] Multi-Dimensional Model：多維度資料模型
-一般的資料結構通常是Tabular Model（表格式資料模型），使用傳統的表格然後多個表格關聯
+一般的資料結構通常是表格式資料模型（Tabular Model），使用傳統的表格然後多個表格關聯
 但多維度資料結構型態為Cube(可想像成正方體)，使用維度(Dimension)和量值(Measure)為基礎
-相較之下多維度資料模型具有較高的可擴展性，但也較為困難且複雜
+相較之下多維度資料模型具有較高的可擴展性，但也較為困難且複雜。
 
 ---
 
@@ -35,9 +35,9 @@ IEEE的軟體工程術語標準辭典(IEEE Standard Glossary of Software Enginee
 ![image.png](/.attachments/image-2f7b0c23-bc8e-4982-b200-44f928296dda.png)
 為 Prometheus 的核心主程式，本身也是一個時間序列資料庫，負責整個監控集群的數據拉取、處理、計算和存儲。
 Prometheus Server 裡面包含三個模組如下：
-(1) Retrieval：負責採樣、定時收集及pull數據。
+(1) Retrieval：負責定時收集及pull數據。
 (2) TSDB：儲存時間序列資料於本地磁碟。
-(3) HTTP Server：提供 http 服務接口查询，預設 Port 為9090。
+(3) HTTP Server：提供 http 服務接口查詢，預設 Port 為9090。
 
 
 
@@ -45,18 +45,22 @@ Prometheus Server 裡面包含三個模組如下：
 
 
 **2. Pushgateway (可選)**
-![image.png](/.attachments/image-191630a8-1845-49de-a23e-81bc45a0a56d.png)
+![image.png](/.attachments/image-69991ab3-3588-4bf9-9353-6ab344b11451.png)
 為 Prometheus 組件，類似代理服務概念，Pushgateway 存在的原因主要是為了解決"不支援或無法用 pull 方式獲取數據的情形"，例如：
-(1) 用於臨時性Job(Short-lived jobs)推送。有些 Job 存在期間較短，有可能 Prometheus 來 Pull 時就消失，因此需透過一個Pushgateway來推送，並讓 Prometheus 去 Pushgateway pull metrics。
+(1) 用於臨時性Job(Short-lived jobs)推送(最大宗)。
+有些 Job 存在期間較短，有可能 Prometheus 來 Pull 時就消失，因此需透過一個Pushgateway來推送，並讓 Prometheus 去 Pushgateway pull metrics。
 
-(2) 當網路環境不允許 Prometheus Server 和 Exporter 直接進行資料數據pull的時候(ex：在不同的子網路or防火牆)，就可使用 PushGateway 來進行中轉(可想像成類似轉運站的概念)。
+(2) 當網路環境不允許 Prometheus Server 和 Exporter 直接進行資料數據pull的時候(ex：在不同的子網路or防火牆)，就可使用 PushGateway 來進行轉運資料(可想像成類似轉運站的概念)。
 
-(3)如果有自己定義 shell 的腳本來監控服務健康狀態，或有監控多項不同的數據，可藉助 PushGateway 把對應數據按照 Prometheus 的格式 push 到 PushGateway。
+(3)如果有"自己定義 shell 的腳本"來監控服務健康狀態，因自己定義shell的腳本可能會不符合Prometheus的定義，所以也可使用Pushgetway將資料push上去。
+(不過如果是都要自己定義shell腳本的話，那通常都會寫exporter，所以第3種狀況不太會用Pushgetway來處理XD")
 
-但是官網建議在上述幾種狀況用 PushGateway 即可，如太常使用的話可能會有影響(須留意)：
+但是官網建議在上述幾種狀況用 PushGateway 即可，如太常使用的話可能會有影響，須留意~!：
 1.如果將多個targets、jobs or instances的數據資料匯入到單一PushGateway做監視，容易使這PushGateway有單點失誤及潛在危險的風險。
-2.如果Prometheus pull up 的資訊，up資訊只會針對PushGateway, 不會pull到每個匯入資料節點的up資訊。
-3.Pushgateway 可以"永遠push"&永遠暴露給Prometheus"相關節點给它的所有監控數據。看起來好像是優點，但是如果不需要監控了，Pushgateway還是會繼續push數據&暴露給Prometheus，就會導致Prometheus一直pull到舊數據，要解決這狀況只能手動清理Pushgateway不要的數據。
+
+2.如果Prometheus pull "up" 的資訊(順便解釋一下，up的意思就是指那機器是否有on起來)，只會pull到PushGateway的up資訊，無法去細分說在Pushgetway之前的節點up資訊為何。
+
+3.Pushgateway 可以"永遠push監控資料"&永遠暴露給Prometheus"，看起來好像是優點，但是，如果需要push到Pushgetway的資料不需要監控了，Pushgateway還是會繼續push數據&暴露給Prometheus，就會導致Prometheus一直pull到不必要的數據。要解決這狀況，只能手動清理並釐清有哪些資料需要push到Pushgateway。
 
 
 
@@ -92,7 +96,7 @@ Service Discovery是自動檢測網絡上的設備和服務的過程，通過網
 
 ---
 # ◎ Prometheus運作方法
-1. Prometheus的基本原理是**通过HTTP**，**定期**pull被監控組件的狀態，任意组件只要提供對應的HTTP接口，即可被監控。
+1. Prometheus的基本原理是**通過HTTP**，**定期**pull被監控組件的狀態，任意组件只要提供對應的HTTP接口，即可被監控。
 首先，Prometheus Server中的Retrieval會定時採樣、收集及pull數據，要監控的數據資料可從4個地方來(如下圖)
 - [ ] 從 Jobs 或者 Exporters 中拉取 Metrics
 - [ ] 來自 Pushgateway 的 Metrics
