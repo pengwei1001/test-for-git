@@ -34,10 +34,7 @@
 **1. Prometheus Server**
 ![image.png](/.attachments/image-2f7b0c23-bc8e-4982-b200-44f928296dda.png)
 為 Prometheus 的核心主程式，本身也是1個時間序列資料庫，負責整個監控集群的數據拉取、處理、計算和存儲。
-Prometheus Server 裡面包含3個模組如下：
-(1) Retrieval：負責定時收集及pull數據。
-(2) TSDB：儲存時間序列資料於本地磁碟。
-(3) HTTP Server：提供 http 服務接口查詢，預設 Port 為9090。
+Prometheus Server 裡面包含Retrieval、TSDB及HTTP Server3個模組。
 
 
 
@@ -78,7 +75,7 @@ Exporter 為第三方 Client Library 開發的 HTTP server，用來曝露已有�
 
 
 **4. AlertManager**
-![image.png](/.attachments/image-721237a5-1159-46c0-91df-c97391bbb6ad.png)
+![image.png](/.attachments/image-f4488b5d-9d5b-4242-886f-ee8bce0f7d46.png)
 接收來至 Prometheus Server 的 Alert event ，並依據定義的 Notification 組態發送警報，常見的接收方式有：e-mail，pagerduty，webhook，slack 等。
 
 ◎關於 AlertManager 更詳細資料可到「告警系統」
@@ -96,7 +93,9 @@ Service Discovery 是自動檢測網絡上的設備和服務的過程，通過�
 ---
 # ◎ Prometheus運作方法
 1. Prometheus 的基本原理是**通過HTTP**，**定期**pull被監控組件的狀態，任意组件只要提供對應的HTTP接口，即可被監控。
-首先，Prometheus Server 中的 Retrieval 會定時採樣、收集及pull數據，要監控的數據資料可從4個地方來(如下圖)
+
+
+首先，Prometheus Server 中的 Retrieval 負責定義 Prometheus Server 需要從哪些地方pull數據，定義完後再定時收集及pull數據，要監控的數據資料可從4個地方來(如下圖)
 - [ ] 從 Jobs 或者 Exporters 中拉取 Metrics
 - [ ] 來自 Pushgateway 的 Metrics
 - [ ] 如有監控其他的 Prometheus Server 的需求，因都有HTTP接口，所以也可從被監控的 Prometheus Server 拉取 Metrics。
@@ -112,6 +111,7 @@ Service Discovery 是自動檢測網絡上的設備和服務的過程，通過�
 - [ ] 數據處理：根據配置的數據格式或者標籤做轉換/刪除等操作。
 - [ ] 根據已定義好的alert.rule中進行計算&判斷：例如rule裡面有條告警規則定義是"CPU使用率達到80%"，那 TSDB 會對數據進行計算看是否符合告警定義，如果符合，則發送警告給 AlertManager ；如不符合就不做操作。
 - [ ] 存儲資料：完成上面的操作之後，TSDB 會根據配置時間周期保存數據到Local端或者是第三方存儲中。
+(至於HTTP Server則是提供 http 服務接口查詢，預設 Port 為9090。)
 
 
 
